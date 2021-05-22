@@ -25,7 +25,7 @@ jobs:
             ${{ runner.os }}-npm-cache-
       - name: build
         run: |
-          sudo apt-get install fonts-nanum fonts-nanum-coding fonts-nanum-extra
+          sudo apt-get install fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core
           npm install
           npm run build
       - uses: peaceiris/actions-gh-pages@v3
