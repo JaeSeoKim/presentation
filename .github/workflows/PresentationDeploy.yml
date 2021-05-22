@@ -25,11 +25,12 @@ jobs:
             ${{ runner.os }}-npm-cache-
       - name: build
         run: |
-          sudo apt-get install fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core
+          sudo apt-get install fonts-nanum*
           npm install
           npm run build
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
+          cname: presentation.jaeseokim.dev
           publish_dir: ./dist
