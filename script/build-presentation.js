@@ -5,7 +5,7 @@ process.env.PATH = `${process.env.PATH}:node_modules/.bin`;
 
 const bs = path.join(process.cwd(), "node_modules/.bin/bs");
 const SRC_DIR = "src/";
-const OUT_DIR = "dist/";
+const OUT_DIR = "public/";
 
 const targetList = fs
   .readdirSync(SRC_DIR, { withFileTypes: true })
