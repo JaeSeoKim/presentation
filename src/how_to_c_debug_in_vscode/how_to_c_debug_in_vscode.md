@@ -1,5 +1,5 @@
 title: vscode에서 C debug 하기!
-license: <span style="float: right;"></a> by <a href="https://github.com/JaeSeoKim" >&copy;jaeskim</a>, <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/80x15.png" /></a></span>
+license: <span style="float: right; margin-right: 80px;"></a> by <a href="https://github.com/JaeSeoKim" >&copy;jaeskim</a>, <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/80x15.png" /></a></span>
 class: animation-fade
 layout: true
 

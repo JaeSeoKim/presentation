@@ -7,16 +7,16 @@ const bs = path.join(process.cwd(), "node_modules/.bin/bs");
 const SRC_DIR = "src/";
 const OUT_DIR = "public/";
 
-const targetList = fs
-  .readdirSync(SRC_DIR, { withFileTypes: true })
-  .map((node) => {
-    if (node.isDirectory)
-      return {
-        name: `${node.name}.md`,
-        path: path.join(process.cwd(), SRC_DIR, node.name),
-        outdir: path.join(process.cwd(), OUT_DIR),
-      };
-  });
+let targetList = [];
+
+fs.readdirSync(SRC_DIR, { withFileTypes: true }).map((node) => {
+  if (node.isDirectory() && node.name != "template")
+    targetList.push({
+      name: `${node.name}.md`,
+      path: path.join(process.cwd(), SRC_DIR, node.name),
+      outdir: path.join(process.cwd(), OUT_DIR),
+    });
+});
 
 console.log(`[BUILD]`, `found target node : ${targetList.length}`);
 
@@ -28,7 +28,7 @@ const exec_cmd = (cmd, cwd) =>
         cwd,
         env: process.env,
       });
-      console.log(`[OUT]`, out.toString());
+      console.log(`[OUT]`, out.toString().trim());
       resolve(out);
     } catch (error) {
       console.log(`[ERROR]`, error);
@@ -39,13 +39,18 @@ const exec_cmd = (cmd, cwd) =>
 const buildBackSlide = async (target) => {
   console.log(`[START]`, target.name);
   const cmds = [
-    `node ${bs} export ${target.name} --strip-notes -o ${target.outdir}`,
-    `node ${bs} pdf ${path.join(target.name)} --strip-notes -o ${
+    `node ${bs} export ${path.join(
+      target.path,
+      target.name
+    )} --strip-notes --verbose -o ${target.outdir}`,
+    `node ${bs} pdf ${path.join(target.path, target.name)} --strip-notes --verbose -o ${
       target.outdir
     }`,
   ];
   try {
-    await Promise.all(cmds.map((cmd) => exec_cmd(cmd, target.path)));
+    await Promise.all(
+      cmds.map((cmd) => exec_cmd(cmd, path.join(process.cwd(), SRC_DIR)))
+    );
   } catch (error) {
     console.log(`[ERROR]`, target.name);
     return;
