@@ -13,6 +13,7 @@ fs.readdirSync(SRC_DIR, { withFileTypes: true }).map((node) => {
   if (node.isDirectory() && node.name != "template")
     targetList.push({
       name: `${node.name}.md`,
+      source: node.name,
       path: path.join(process.cwd(), SRC_DIR, node.name),
       outdir: path.join(process.cwd(), OUT_DIR),
     });
@@ -37,25 +38,29 @@ const exec_cmd = (cmd, cwd) =>
   });
 
 const buildBackSlide = async (target) => {
-  console.log(`[START]`, target.name);
+  console.log(`[START]`, target.source);
   const cmds = [
     `node ${bs} export ${path.join(
       target.path,
       target.name
+    )} --strip-notes --web --verbose -o ${path.join(
+      target.outdir,
+      target.source
+    )}`,
+    `node ${bs} pdf ${path.join(
+      target.path,
+      target.name
     )} --strip-notes --verbose -o ${target.outdir}`,
-    `node ${bs} pdf ${path.join(target.path, target.name)} --strip-notes --verbose -o ${
-      target.outdir
-    }`,
   ];
   try {
     await Promise.all(
       cmds.map((cmd) => exec_cmd(cmd, path.join(process.cwd(), SRC_DIR)))
     );
   } catch (error) {
-    console.log(`[ERROR]`, target.name);
+    console.log(`[ERROR]`, target.source);
     return;
   }
-  console.log(`[END]`, target.name);
+  console.log(`[END]`, target.source);
 };
 
 targetList.forEach(async (target) => await buildBackSlide(target));

@@ -33,7 +33,6 @@ jobs:
           publish_branch: public
           cname: slide.jaeseokim.dev
           publish_dir: ./public
-          keep_files: true
           user_name: "github-actions[bot]"
           user_email: "github-actions[bot]@users.noreply.github.com"
           commit_message: ":docs: Update some slide ${{ env.GITHUB_SHA }}"
