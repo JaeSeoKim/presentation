@@ -23,14 +23,20 @@ NOTE: 발표대본
 
 ---
 
-# 목차
+# 🗂 목차
 
 - ## 😴 시작하기 전에...
 - ## ✅ 준비물
 - ## 📑 JSON 간단하게 알아보기!
 - ## ⚙️ vscode debug 설정 파일 알아보기!
-- ## 🏓 단일 c 파일 디버깅 해보기!
-- ## 🥊 c 프로젝트 디버깅 해보기!
+- ## 🏓 단일 c 파일 디버깅 설정 해보기!
+- ## 🥊 c 프로젝트 디버깅 설정 해보기!
+
+---
+
+# 🗂 목차
+
+- ## 🐛 디버그 기능 살펴보기!
 - ## 🔗 참고 사이트!
 
 ---
@@ -70,7 +76,9 @@ class: middle
 
 ## 🤩 vscode를 이용한 디버깅 방법 모습!
 
+<div class="responsive">
 <img src="image/vscode_debug.gif" alt="vscode를 이용한 디버깅 모습"/>
+</div>
 
 ---
 
@@ -177,7 +185,7 @@ C 프로젝트를 기준으로 실행파일를 어떤 Debugger로 돌릴지, 어
 
 ---
 
-# 🏓 단일 c 파일 디버깅 해보기!
+# 🏓 단일 c 파일 디버깅 설정 해보기!
 
 매우 간단한 팩토리얼 구하는 함수를 예시로 디버깅을 해보겠습니다!
 
@@ -198,15 +206,15 @@ int	main(void)
 
 ---
 
-## tasks.json 정의하기!
+## ✍️ tasks.json 작성하기!
 
 해당 파일을 열어둔 상태에서 `f5` 를 눌러봅니다!
 
-![factorial_debug_0](image/factorial_debug_0.png)
+<img width="1080px" alt="factorial_debug_0" src="image/factorial_debug_0.png"/>
 
 ---
 
-## tasks.json 정의하기!
+## ✍️ tasks.json 작성하기!
 
 `C++ (GDB/LLDB)` 로 정의하게 되면 workspace에 아래와 같은 파일들이 생성되는 모습을 볼 수 있습니다.
 
@@ -225,7 +233,7 @@ $ tree -a .
 
 ---
 
-## tasks.json 정의하기!
+## ✍️ tasks.json 작성하기!
 
 ```json
 "tasks": [
@@ -247,7 +255,7 @@ $ tree -a .
 
 ---
 
-## tasks.json 정의하기!
+## ✍️ tasks.json 작성하기!
 
 파일을 간단하게 보면 평소에 터미널에 치던 `gcc` 명령어도 보이고 `-o` 옵션도 보이고 하지만 `${변수}` 형태로 되어 변수로 보이는 것들을 볼 수 있습니다.
 
@@ -265,7 +273,7 @@ $ tree -a .
 
 ---
 
-## tasks.json 정의하기!
+## ✍️ tasks.json 작성하기!
 
 `type` : 해당 task의 type를 정의 합니다! (ex. `cppbuild`)
 
@@ -285,7 +293,7 @@ $ tree -a .
 
 ---
 
-## tasks.json 정의하기!
+## ✍️ tasks.json 작성하기!
 
 ```json
 "command": "/usr/bin/gcc",
@@ -303,27 +311,27 @@ $ tree -a .
 
 ---
 
-## launch.json 정의하기!
+## ✍️ launch.json 작성하기!
 
 이제 `tasks.json` 설정을 통해 실행 파일이 만들어질 수 있게 되었으니 debug 실행에 대해서 정의 해봅니다!
 
 `.vscode/launch.json` 파일을 보면 `tasks.jon` 과 유사한 구조로 `"configurations"` 를 `Object Array` 형태로 정의하는 것을 볼 수 있습니다!
 
+--
+
 ```json
-"configurations": [
-{
-  "name": "clang - 활성 파일 빌드 및 디버그",
-  "type": "cppdbg",
-  "request": "launch",
-  "program": "${fileDirname}/${fileBasenameNoExtension}",
-  "args": [],
-  "stopAtEntry": false,
-  "cwd": "${fileDirname}",
+"name": "clang - 활성 파일 빌드 및 디버그",
+"type": "cppdbg",
+"request": "launch",
+"program": "${fileDirname}/${fileBasenameNoExtension}",
+"args": [],
+"stopAtEntry": false,
+"cwd": "${fileDirname}",
 ```
 
 ---
 
-## launch.json 정의하기!
+## ✍️ launch.json 작성하기!
 
 일단 여기서 가장 중요하게 봐야 하는 부분이 있는데 `"preLaunchTask"` 부분 입니다.
 
@@ -343,7 +351,7 @@ $ tree -a .
 
 ---
 
-## launch.json 정의하기!
+## ✍️ launch.json 작성하기!
 
 `"args"` 를 통해서 실행시의 인자를 배열 형태로 전달할 수 있는 것을 볼 수 있습니다!
 
@@ -361,7 +369,7 @@ $ tree -a .
 
 ---
 
-## launch.json 정의하기!
+## ✍️ launch.json 작성하기!
 
 `"stopAtEntry"` 옵션은 초기 Debug를 시작을 할 때 main 시작에서 멈추는지에 대해서 설정하는 옵션입니다!
 
@@ -379,7 +387,7 @@ breakpoint를 설정안하고 처음부터 로직을 살펴볼 때 유용합니�
 
 ---
 
-## launch.json 정의하기!
+## ✍️ launch.json 작성하기!
 
 이때 아래와 같은 형태의 `Object Array` 형태로 정의하게 됩니다!
 
@@ -402,7 +410,7 @@ breakpoint를 설정안하고 처음부터 로직을 살펴볼 때 유용합니�
 
 ---
 
-## launch.json 정의하기!
+## ✍️ launch.json 작성하기!
 
 `"MIMode"` 를 통해 `gdb`나 `lldb`로 실행을 할지에 대해서 정의가 가능합니다.
 
@@ -421,13 +429,170 @@ breakpoint를 설정안하고 처음부터 로직을 살펴볼 때 유용합니�
 
 ---
 
-# 🥊 c 프로젝트 디버깅 해보기!
+# 🥊 c 프로젝트 디버깅 설정 해보기!
 
 방금전에 해본 단일 c 파일 디버깅은 기본 `f5` 으로 초기설정한 부분만으로도 사용이 가능하지만 `42seoul`에서는 특정 라이브러리를 만들거나 규모가 있는 c 프로젝트를 진행하기 때문에 이번에는 `make` 명령어를 활용하여 디버깅를 해봅니다!
 
-> ### 아래의 Git 주소에서 example를 다운 받아주세요!
+> ### 🐙 아래의 Git 주소에서 example를 Clone 받아주세요!
 
 > https://github.com/JaeSeoKim/c_project_vscode_debug_example
+
+Clone후 `.vscode` 경로의 설정을 지워주세요!
+
+해당 예제는 간단한 2개의 함수를 가지고 있는 라이브러리 `libtest.a` 를 build 하는 프로젝트 입니다!
+
+이 프로젝트를 가지고 예시를 작성해보겠습니다!
+
+---
+
+# 🥊 c 프로젝트 디버깅 설정 해보기!
+
+일단 `makefile` 를 확인 해봅니다!
+
+```makefile
+NAME = libtest.a
+# ... 생략 ...
+ifeq ($(DEBUG),true)
+CFLAGS += -g
+endif
+# ... 생략 ...
+%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+# ... 생략 ...
+.PHONY: all clean fclean re
+```
+
+---
+
+# 🥊 c 프로젝트 디버깅 설정 해보기!
+
+일단 해당 target를 살펴 보면 `all clean fclean re` 와 같이 기본적인 target들이 명시 되어 있는 것 을 볼 수 있습니다!
+
+또한 Object로 Build 할때에는 `$(CC) $(CFLAGS) -c $< -o $@` 와 같이 간단한 형태로 Build를 하고 있는 모습도 볼 수 있습니다!
+
+이 때 Object를 build 할 때 **debug**을 위해 옵션 `-g` 를 추가해주어야 하는데 항상 `-g` 플래그가 추가되면 안되기 떄문에 아래와 같이 환경 변수를 이용하여 추가가 가능하도록 합니다!
+
+```makefile
+ifeq ($(DEBUG),true)
+CFLAGS += -g
+endif
+```
+
+---
+
+## ✍️ tasks.json 작성하기!
+
+한번 환경변수 `DEBUG` 를 `true` 로 주면서 make 해주는 `task`를 작성해봅니다!
+
+--
+
+```json
+{
+  // ... 생략 ...
+  "command": "make",
+  "args": ["re"],
+  "options": {
+    "cwd": "${workspaceFolder}",
+    "env": { "DEBUG": "true" }
+  }
+  // ... 생략 ...
+}
+```
+
+---
+
+## ✍️ tasks.json 작성하기!
+
+방금전에 작성한 부분을 자세히 살펴보면 `command` 는 `make`로 주어서 저희가 미리작성한 make 작업을 수행 할 수 있도록 하고 `args` 로는 `re` 인자를 넘겨주어서 re 역할을 수행 할 수 있는 것을 볼 수 있습니다!
+
+그리고 가장 중요한 **`options`** 부분을 보면 `"env": { "DEBUG": "true" }` 와 같은 형태로 작업을 진행 할 때 환경 변수 `DEBUG` 를 `true` 로 설정해 주는 것을 볼 수 있습니다!
+
+이 부분을 통해서 libary를 **Debug** 용으로 Build 할 수 있는 task를 작성 한 것을 확인 할 수 있습니다!
+
+이제 debug용으로 build된 `libtest.a` 파일이 있으니 테스트 코드와 함께 build를 해서 실행파일을 만드는 `task` 를 작성해봅니다!
+
+---
+
+## ✍️ tasks.json 작성하기!
+
+프로젝트 내부에 `main.c` 라는 간단한 테스트 코드가 있는데 이것을 이용하여 실행파일을 만드는 `task` 를 작성합니다.
+
+--
+
+```json
+{
+  // ... 생략 ...
+  "command": "gcc",
+  "args": ["-L.", "-ltest", "-I.", "-g", "main.c", "-o", "test.out"],
+  "options": {
+    "cwd": "${workspaceFolder}"
+  },
+  "dependsOn": ["libtest - debug build"]
+  // ... 생략 ...
+}
+```
+
+---
+
+## ✍️ tasks.json 작성하기!
+
+작성한 내용을 보면 간단하게 `gcc` 명령어를 통해서 `libtest.a` 파일을 이용하여 `main.c` 를 디버깅용 실행 파일로 만드는 것을 볼 수 있습니다.
+
+이 떄 중요한 부분은 바로 `libtest.a` 파일이 debug 용으로 build 되어야 하는 부분인데 `dependsOn` 항목을 이용하여 방금전에 정의 했던 `task` 작업을 명시 해줌으로 이 작업이 실행되기전에 해당 `task` 를 실핼 할 수 있게 됩니다!
+
+실제로 task를 실행 해보면 다음과 같이 작업을 진행하는 모습을 볼 수 있습니다!
+
+---
+
+### 🔨 Task 작업이 진행된 모습!
+
+<div class="responsive" >
+  <img alt="c_project_build_task" src="image/c_project_build_task.png" />
+</div>
+
+---
+
+## ✍️ launch.json 작성하기!
+
+이제 테스트용으로 Build된 실행 파일을 vscode에서 실행 할 수 있도록 설정 합니다!!!
+
+```json
+{
+  "name": "libtest - main.c exec",
+  "type": "cppdbg",
+  "request": "launch",
+  "program": "${workspaceFolder}/test.out",
+  "args": [],
+  // ... 생략 ...
+  "preLaunchTask": "libtest - main.c build"
+}
+```
+
+위와 같이 build된 실행파일에 대해서 정의를 해주고 `preLaunchTask` 항목을 아까전에 정의한 `task` 로 설정 합니다!
+
+---
+
+## ✍️ launch.json 작성하기!
+
+이제 `F5` 눌러서 디버그를 실행하면 아래와 같이 디버그가 가능한 상태가 보이는 것을 볼 수 있습니다!
+
+<div class="responsive">
+  <img src="./image/c_project_debug_running.png" alt="c_project_debug_running" />
+</div>
+
+---
+
+- # 🐛 디버그 기능 살펴보기!
+
+이제 vscode 디버깅 설정 하는 방법에 대해서 알게 되었으니 이제 디버그 기능에 대해서 자세히 알아봅니다!
+
+<div class="responsive">
+  <img src="./image/vscode_debug_feild.png" alt="vscode_debug_feild"/>
+</div>
+
+---
+
+- ## 🚦 BreakPoint!
 
 ---
 
