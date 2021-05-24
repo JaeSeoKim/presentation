@@ -2,7 +2,7 @@
   "name": "presentation",
   "version": "1.0.0",
   "scripts": {
-    "build": "node script/build-presentation.js"
+    "build": "node script/buildBackSlide.js"
   },
   "author": "JaeSeoKim",
   "license": "CC BY-NC",
