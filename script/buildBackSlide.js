@@ -43,14 +43,10 @@ const buildBackSlide = async (target) => {
     `node ${bs} export ${path.join(
       target.path,
       target.name
-    )} --strip-notes --verbose -o ${path.join(
-      target.outdir,
-      target.source
-    )}`,
-    `node ${bs} pdf ${path.join(
-      target.path,
-      target.name
-    )} --verbose -o ${target.outdir}`,
+    )} --strip-notes --verbose -o ${path.join(target.outdir)}`,
+    `node ${bs} pdf ${path.join(target.path, target.name)} --verbose -o ${
+      target.outdir
+    }`,
   ];
   try {
     await Promise.all(
